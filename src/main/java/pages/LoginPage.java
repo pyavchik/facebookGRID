@@ -6,6 +6,7 @@ import org.openqa.selenium.WebElement;
 
 public class LoginPage {
     WebDriver driver;
+
     private final String LOGIN_PAGE_URL = "https://www.facebook.com/";
 
     private String idEmailFl = "email";

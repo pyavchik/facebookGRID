@@ -1,10 +1,10 @@
 import org.openqa.selenium.Platform;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebDriverException;
 import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.remote.RemoteWebDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
-import org.testng.annotations.Optional;
 import org.testng.annotations.Parameters;
 
 import java.net.MalformedURLException;
@@ -18,7 +18,7 @@ public class BaseTest {
 
     @Parameters({"browser"})
     @BeforeClass(alwaysRun = true)
-    public void beforeTest(@Optional("firefox") String browser) throws MalformedURLException {
+    public void beforeTest(String browser) throws MalformedURLException {
 
         DesiredCapabilities cap;
 
@@ -33,14 +33,12 @@ public class BaseTest {
         } else if (browser.equals("safari")){
             cap = DesiredCapabilities.safari();
             cap.setBrowserName("safari");
-            cap.setPlatform(Platform.MAC);
-        } else {
-            cap = DesiredCapabilities.firefox();
-            cap.setBrowserName("firefox");
             cap.setPlatform(Platform.ANY);
+        } else {
+            throw new WebDriverException("Unknown browser: " + browser);
         }
 
-        driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),cap);
+        driver = new RemoteWebDriver(new URL("http://192.168.88.236:4444/wd/hub"),cap);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);

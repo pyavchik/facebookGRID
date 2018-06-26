@@ -9,7 +9,8 @@ import static utils.PropertiesClass.getPropertyValue;
 public class AdvertisingCreateTest extends BaseTest {
 
     @Test
-    public void advertisingCreateTest()  {LoginPage loginPage = new LoginPage(driver);
+    public void advertisingCreateTest() {
+        LoginPage loginPage = new LoginPage(driver);
         MainPage mainPage = new MainPage(driver);
         AdvertisingPage advertisingPage = new AdvertisingPage(driver);
 

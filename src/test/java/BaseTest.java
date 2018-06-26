@@ -18,7 +18,7 @@ public class BaseTest {
 
     @Parameters({"browser"})
     @BeforeClass(alwaysRun = true)
-    public void beforeTest(String browser) throws MalformedURLException {
+    public void before(String browser) throws MalformedURLException {
 
         DesiredCapabilities cap;
 
@@ -38,14 +38,14 @@ public class BaseTest {
             throw new WebDriverException("Unknown browser: " + browser);
         }
 
-        driver = new RemoteWebDriver(new URL("http://192.168.88.236:4444/wd/hub"),cap);
+        driver = new RemoteWebDriver(new URL("http://localhost:4444/wd/hub"),cap);
         driver.manage().deleteAllCookies();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
     }
 
     @AfterClass
-    public void afterTest(){
+    public void after(){
         driver.quit();
     }
 }

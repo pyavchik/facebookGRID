@@ -1,24 +1,23 @@
 import org.testng.annotations.Test;
+import pages.AdvertisingPage;
 import pages.LoginPage;
 import pages.MainPage;
-import pages.PublicCreatePage;
 
 import static org.testng.Assert.assertEquals;
 import static utils.PropertiesClass.getPropertyValue;
 
-public class PublicCreateTest extends BaseTest{
+public class CreateAdvertisingTest extends BaseTest {
 
     @Test
-    public void createPublicGroupTest(){
+    public void createAdvertisingTest() {
         LoginPage loginPage = new LoginPage(driver);
         MainPage mainPage = new MainPage(driver);
-        PublicCreatePage publicCreatePage = new PublicCreatePage(driver);
+        AdvertisingPage advertisingPage = new AdvertisingPage(driver);
 
         loginPage.open();
         loginPage.doLogin(getPropertyValue("login"), getPropertyValue("password"));
         assertEquals(mainPage.findUserNavigationLabel().isDisplayed(), true);
-        publicCreatePage.open();
-        assertEquals(publicCreatePage.publicCreatPageAvailable(), true);
+        advertisingPage.open();
+        assertEquals(advertisingPage.isAdsManagerButtonAvailable(), true);
     }
-
 }
